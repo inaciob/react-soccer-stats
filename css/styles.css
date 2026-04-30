@@ -1,18 +1,42 @@
-/* Start utilities */
-.fs-16 {
-	font-size: 1rem;
+.outer-container {
+	background-color: gainsboro;
 }
-/* End utilities */
+
+/* Start Bootstrap overrides */
+.btn-group-lg>.btn, 
+.btn-lg {
+	border-radius: 0;
+}
+
+/* NOTE: This specific group is for fixing a vertical alignment issue with stacked tab buttons on smaller mobile devices */
+.btn-group .btn+.btn, 
+.btn-group .btn+.btn-group, 
+.btn-group .btn-group+.btn, 
+.btn-group .btn-group+.btn-group, 
+.btn-group-vertical .btn+.btn, 
+.btn-group-vertical .btn+.btn-group, 
+.btn-group-vertical .btn-group+.btn, 
+.btn-group-vertical .btn-group+.btn-group {
+	margin-left: 0;
+}
+
+.dropdown-menu.show {
+	width: 100%;
+}
+/* End Bootstrap overrides */
 
 .match-filter-btn {
 	background-color: #fff;
+	width: 100%;
+
+	&:hover {
+		filter: brightness(1.25);
+	}
 }
 
 .match-filter-btn:focus,
 .match-filter-btn.active:focus,
-/* NOTE: This specific selector exists to override default Bootstrap behaviour */
 .btn-outline-success.match-filter-btn:not(:disabled):not(.disabled).active:focus {
-	box-shadow: none;
 	outline: none;
 }
 
@@ -22,40 +46,120 @@
 	border-radius: 5px;
 	color: #2E3133;
 	transition: background-color .25s ease;
+
+	.match-league {
+		border-bottom: 1px solid #000;
+		font-size: 1.5rem;
+	}
+
+	.league-logo,
+	.team-crest {
+		height: 40px;
+		width: 40px;
+	}
+
+	.match-details--teams {
+		border-left: 1px solid #000;
+	}
+
+	.match-details--score {
+		min-width: 80px;
+		max-width: 80px;
+	}
+
+	.live-score {
+		font-size: 24px;
+		align-self: flex-start;
+		min-width: 40px;
+	}
+
+	&:hover {
+		background-color: #BFFFBF;
+	}
 }
 
-.match:hover {
-	background-color: #BFFFBF;
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-60px); }
+}
+
+.league-dropdown-button {
+	width: 100%;
+}
+.league-dropdown-button::after {
+	position: relative;
+	left: calc(50% + 0.6em);
+}
+
+.loader-overlay {
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 9999;
+	display: flex; 
+    align-items: center;
+    justify-content: center;
+
+	.loader-overlay-animation {
+		display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .loader-overlay-animation__ball {
+        	background-image: url("../images/soccer-ball.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            width: 4rem;
+            height: 4rem;
+            /* Apply animation only to the ball */
+            animation: bounce 0.5s ease-in infinite alternate;
+        }
+
+    	.loader-overlay-animation__text {
+    		margin-top: 1rem;
+    	}
+	}
 }
 
 /* Start media queries */
-@media screen and (max-width: 993px) {
+@media screen and (min-width: 200px) {
+	.live-score {
+		max-width: 50%;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.btn-group-lg>.btn, 
+	.btn-lg {
+		border-radius: 0.3rem;
+	}
+
+	.match-filter-btn {
+		width: auto;
+	}
+
+	.league-dropdown-button,
+	.dropdown-menu.show {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 992px) {
 	.container {
 		 max-width: 90vw; 
 	}
 }
 
-@media screen and (min-width: 200px) and (max-width: 414px) {
-	.text-block {
-		display: block;
+@media screen and (min-width: 992px) {
+	.matches-container {
+		display: grid;
+		grid-template-columns: 70% auto;
 	}
 
-	.live-score {
-		max-width: 50%;
-	}
-
-	.referee-name {
-		padding-left: 30px;
-	}
-}
-
-@media screen and (min-width: 414px) and (max-width: 992px) {
-	.text-block {
-		display: block;
-	}
-
-	.live-score {
-		max-width: 50%;
+	.league-dropdown-button,
+	.dropdown-menu.show {
+		width: 100%;
 	}
 }
 /* End media queries */
